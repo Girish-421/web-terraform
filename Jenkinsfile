@@ -6,7 +6,8 @@ pipeline {
     }
 
     environment {
-        // You can leave this empty or set other environment variables
+        AWS_ACCESS_KEY_ID = credentials('aws-credentials')  // Assuming AWS credentials stored in Jenkins
+        AWS_SECRET_ACCESS_KEY = credentials('aws-credentials')
     }
 
     stages {
@@ -19,12 +20,7 @@ pipeline {
         stage('Inject AWS Credentials') {
             steps {
                 script {
-                    echo "Injecting AWS credentials..."
-                    withCredentials([string(credentialsId: 'aws-credentials', variable: 'AWS_ACCESS_KEY_ID'),
-                                     string(credentialsId: 'aws-credentials', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        // AWS credentials are now available as environment variables
-                        echo "AWS credentials injected."
-                    }
+                    echo "AWS credentials injected."
                 }
             }
         }
