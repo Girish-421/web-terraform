@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Learning Hub</title>
+    <style>
+        /* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #222222;
+    padding: 10px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar a {
+    color: #bdbdbd;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    color: #007acc;
+}
+
+/* Tools Section */
+#tools {
+    padding: 60px 0;
+    background-color: #181818;
+}
+
+#tools h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+.tool-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 280px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.card:hover {
+    background-color: #333333;
+}
+
+.card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.card button {
+    background-color: #007acc;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #005f99;
+}
+
+/* Tutorials Section */
+#tutorials {
+    padding: 60px 0;
+}
+
+#tutorials h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+#tutorials .container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#tutorials .tutorial-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+#tutorials .card {
+    background-color: #2a2a2a;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+    width: 280px;
+    flex: 1 1 280px;
+}
+
+#tutorials .card:hover {
+    background-color: #333333;
+}
+
+#tutorials .card h3 {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+#tutorials .card p {
+    font-size: 14px;
+    color: #bdbdbd;
+}
+
+#tutorials .card a {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#tutorials .card a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Section */
+#contact {
+    background-color: #181818;
+    padding: 60px 0;
+}
+
+#contact h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+form label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+form button {
+    background-color: #007acc;
+    display: block;
+    color: #fff;
+    margin: 0 auto;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #005f99;
+}
+
+/* Footer */
+footer {
+    background-color: #222222;
+    color: #e0e0e0;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+}
+/* Certifications Section */
+#certifications {
+    background: #121212;
+    padding: 60px 0;
+    color: #e0e0e0;
+}
+
+#certifications h2 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+#certifications p {
+    font-size: 18px;
+    text-align: center;
+    color: #bdbdbd;
+    margin-bottom: 40px;
+}
+
+.certification-card {
+    background: #2a2a2a;
+    margin: 20px 0;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.certification-card:hover {
+    background: #333333;
+}
+
+.certification-card h3 {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.certification-card p {
+    font-size: 16px;
+    color: #bdbdbd;
+    margin-bottom: 15px;
+}
+
+.certification-card a {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.certification-card a:hover {
+    color: #005ea6;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>DevOps Learning Hub</h1>
+            <p>Your journey to mastering CI/CD, automation, and cloud infrastructure starts here.</p>
+            
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#tools">Tools</a>
+            <a href="#tutorials">Tutorials</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="tools">
+        <div class="container">
+            <h2>Popular DevOps Tools</h2>
+            <div class="tool-list">
+                <div class="card">
+                    <h3>AWS</h3>
+                    <p>Amazon Web Services is a cloud platform offering various services like EC2, S3, and Lambda for scaling and deploying applications.</p>
+                    <button onclick="showToolInfo('aws')">More Info</button>
+                </div>
+                <div class="card">
+                    <h3>Git</h3>
+                    <p>Git is a distributed version control system that allows developers to manage code history and collaborate efficiently.</p>
+                    <button onclick="showToolInfo('git')">More Info</button>
+                </div>
+                <div class="card">
+                    <h3>Terraform</h3>
+                    <p>Terraform is an open-source tool for automating the provisioning of infrastructure using declarative configuration files.</p>
+                    <button onclick="showToolInfo('terraform')">More Info</button>
+                </div>
+                <div class="card">
+                    <h3>Jenkins</h3>
+                    <p>Jenkins is an open-source automation server used to automate the parts of software development related to building, testing, and deploying.</p>
+                    <button onclick="showToolInfo('jenkins')">More Info</button>
+                </div>
+                <div class="card">
+                    <h3>Docker</h3>
+                    <p>Docker is a platform that enables developers to build, run, and share applications in containers for consistent environments across systems.</p>
+                    <button onclick="showToolInfo('docker')">More Info</button>
+                </div>
+                <div class="card">
+                    <h3>Kubernetes</h3>
+                    <p>Kubernetes is an open-source system for automating deployment, scaling, and managing containerized applications.</p>
+                    <button onclick="showToolInfo('kubernetes')">More Info</button>
+                </div>
+            </div>
+
+            <div id="tool-info"></div>
+        </div>
+    </section>
+
+    <section id="tutorials">
+        <div class="container">
+            <h2>Featured Tutorials</h2>
+            <div class="tutorial-list">
+                <div class="card">
+                    <h3><a href="https://youtu.be/k1RI5locZE4?si=NPEkFXVPG6V2SOZN" target="_blank">AWS Tutorial for Beginners</a></h3>
+                    <p>Learn the basics of AWS services, including EC2, S3, and Lambda for cloud deployment.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://www.youtube.com/watch?v=SWYqp7iY_Tc" target="_blank">Git and GitHub Tutorial</a></h3>
+                    <p>Master version control with Git, GitHub, and how to collaborate with teams effectively.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://youtu.be/7xngnjfIlK4?si=JzpuMhTMdoXMiUj5" target="_blank">Terraform Basics Tutorial</a></h3>
+                    <p>Automate infrastructure provisioning using Terraform’s Infrastructure as Code (IaC) approach.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://youtu.be/FX322RVNGj4?si=ibf_ZbRWrSAMDL3Q" target="_blank">Jenkins CI/CD Tutorial</a></h3>
+                    <p>Learn to create and manage CI/CD pipelines using Jenkins.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://youtu.be/3c-iBn73dDE?si=Hh2O2QTdVzWQeVF6" target="_blank">Docker for Beginners</a></h3>
+                    <p>Learn how to containerize applications using Docker and manage them across environments.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://youtu.be/X48VuDVv0do?si=VbjCpP7BpcOHo6SQ" target="_blank">Kubernetes (k8s)</a></h3>
+                    <p>Understand how Kubernetes manages containerized applications and scales them across clusters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="certifications">
+        <div class="container">
+            <h2>Certifications</h2>
+            <p>After completing the tutorials, you can enhance your skills by earning official certifications. Below are the certifications available for each tool:</p>
+            
+            <div class="certification-card">
+                <h3>AWS Certified Solutions Architect</h3>
+                <p>This certification validates your ability to design distributed systems on AWS, covering topics such as compute, storage, networking, and security.</p>
+                <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" target="_blank">Learn More</a>
+            </div>
+            
+            <div class="certification-card">
+                <h3>Git & Github complete course</h3>
+                <p>Become proficient in Git by obtaining this certification, which demonstrates your understanding of version control, branching, and collaboration using Git.</p>
+                <a href="https://www.coursera.org/learn/introduction-git-github" target="_blank">Learn More</a>
+            </div>
+            
+            <div class="certification-card">
+                <h3>HashiCorp Certified: Terraform Associate</h3>
+                <p>This certification focuses on Terraform and the skills required to use it for infrastructure automation, including its syntax, commands, and modules.</p>
+                <a href="https://www.hashicorp.com/certification/terraform-associate" target="_blank">Learn More</a>
+            </div>
+            
+            <div class="certification-card">
+                <h3>Jenkins Certified Engineer</h3>
+                <p>The Jenkins certification validates your ability to set up and configure Jenkins, automate the CI/CD pipeline, and manage Jenkins projects.</p>
+                <a href="https://www.cloudbees.com/jenkins-certification" target="_blank">Learn More</a>
+            </div>
+            
+            <div class="certification-card">
+                <h3>Docker Certified Associate</h3>
+                <p>Earn the Docker Certified Associate certification to showcase your expertise in containerization, Docker architecture, and management of containerized applications.</p>
+                <a href="https://www.docker.com/certification" target="_blank">Learn More</a>
+            </div>
+            
+            <div class="certification-card">
+                <h3>Kubernetes Certified Administrator</h3>
+                <p>This certification demonstrates your ability to configure and manage Kubernetes clusters, including networking, security, and storage in a production environment.</p>
+                <a href="https://www.cncf.io/certification/cka/" target="_blank">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DevOps Learning Hub. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showToolInfo(tool) {
+            let info = {
+                aws: "AWS (Amazon Web Services) provides scalable, reliable, and low-cost infrastructure services to host and manage applications.",
+                git: "Git is a version control system used to track changes in source code during software development.",
+                terraform: "Terraform is an infrastructure as code (IaC) tool used to provision and manage cloud infrastructure through configuration files.",
+                jenkins: "Jenkins is a CI/CD tool that automates building, testing, and deploying software applications.",
+                docker: "Docker is a platform for developing, shipping, and running applications in lightweight containers.",
+                kubernetes: "Kubernetes is an open-source platform for automating containerized application deployment, scaling, and management."
+            };
+
+            let installLinks = {
+                aws: "https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html",
+                git: "https://git-scm.com/book/en/v2/Getting-Started-Installing-Git",
+                terraform: "https://learn.hashicorp.com/tutorials/terraform/install-cli",
+                jenkins: "https://www.jenkins.io/doc/book/installing/",
+                docker: "https://docs.docker.com/get-docker/",
+                kubernetes: "https://kubernetes.io/docs/setup/"
+            };
+
+            document.getElementById('tool-info').innerHTML = `
+                <div id="tool-info">
+                    <h3>${tool.charAt(0).toUpperCase() + tool.slice(1)}</h3>
+                    <p>${info[tool]}</p>
+                    <div id="install-link">
+                        <a href="${installLinks[tool]}" target="_blank">Installation Guide</a>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
