@@ -19,11 +19,12 @@ resource "aws_s3_bucket_website_configuration" "web_config" {
 
 resource "aws_s3_bucket_public_access_block" "public_access_block" {
   bucket                  = aws_s3_bucket.website_bucket.id
-  block_public_acls       = true
+  block_public_acls       = false  # Allow public ACLs
   block_public_policy     = false  # Allow public bucket policies
-  ignore_public_acls      = true
+  ignore_public_acls      = false  # Do not ignore ACLs
   restrict_public_buckets = false
 }
+
 
 resource "aws_s3_bucket_ownership_controls" "s3_ownership" {
   bucket = aws_s3_bucket.website_bucket.id

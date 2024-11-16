@@ -13,11 +13,11 @@ variable "bucket_name" {
 variable "index_html_path" {
   description = "The path to the index.html file on your local system"
   type        = string
-  default     = "D:/FSI/P/StaticWebTerraform-main/index.html"  # Update with the correct local path
+  default     = "index.html"  # Update with the correct local path
 }
 
 variable "error_html_path" {
   description = "The path to the error.html file on your local system"
   type        = string
-  default     = "D:/FSI/P/StaticWebTerraform-main/index.html"  # Update with the correct local path
+  default     = "error.html"  # Update with the correct local path
 }
