@@ -17,14 +17,14 @@ resource "aws_s3_bucket_website_configuration" "web_config" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "website_bucket_block" {
-  bucket = aws_s3_bucket.website_bucket.id
-
+resource "aws_s3_bucket_public_access_block" "public_access_block" {
+  bucket                  = aws_s3_bucket.website_bucket.id
   block_public_acls       = false  # Allow public ACLs
   block_public_policy     = false  # Allow public bucket policies
-  ignore_public_acls      = false  # Do not ignore public ACLs
-  restrict_public_buckets = false  # Do not restrict public bucket access
+  ignore_public_acls      = false  # Do not ignore ACLs
+  restrict_public_buckets = false
 }
+
 
 resource "aws_s3_bucket_ownership_controls" "s3_ownership" {
   bucket = aws_s3_bucket.website_bucket.id
@@ -57,49 +57,11 @@ resource "aws_s3_bucket_policy" "public_policy" {
     Version = "2012-10-17",
     Statement = [
       {
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"  # Apply to all objects in the bucket
-      },
-      {
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:ListBucket"
-        Resource  = aws_s3_bucket.website_bucket.arn  # Apply to the bucket itself
+        Effect    = "Allow",
+        Principal = "*",
+        Action    = "s3:GetObject",
+        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
       }
     ]
   })
-}
-
-# IAM Policy for user to access S3 bucket (Optional, if needed)
-resource "aws_iam_policy" "s3_permissions_policy" {
-  name        = "S3PermissionsPolicy"
-  description = "Policy to allow PutBucketPolicy and PutObject actions on the S3 bucket"
-  policy      = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect   = "Allow"
-        Action   = "s3:PutBucketPolicy"
-        Resource = "arn:aws:s3:::${aws_s3_bucket.website_bucket.bucket}"
-      },
-      {
-        Effect   = "Allow"
-        Action   = "s3:PutObject"
-        Resource = "arn:aws:s3:::${aws_s3_bucket.website_bucket.bucket}/*"
-      }
-    ]
-  })
-}
-
-# Attach the policy to a user or role (example for user)
-resource "aws_iam_user" "example_user" {
-  name = "example-user"
-}
-
-resource "aws_iam_policy_attachment" "example_policy_attachment" {
-  name       = "example-policy-attachment"
-  policy_arn = aws_iam_policy.s3_permissions_policy.arn
-  users      = [aws_iam_user.example_user.name]
 }
