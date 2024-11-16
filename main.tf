@@ -18,11 +18,10 @@ resource "aws_s3_bucket_website_configuration" "web_config" {
 }
 
 resource "aws_s3_bucket_public_access_block" "public_access_block" {
-  bucket = aws_s3_bucket.website_bucket.id
-
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
+  bucket                  = aws_s3_bucket.website_bucket.id
+  block_public_acls       = true
+  block_public_policy     = false  # Allow public bucket policies
+  ignore_public_acls      = true
   restrict_public_buckets = false
 }
 
@@ -33,26 +32,23 @@ resource "aws_s3_bucket_ownership_controls" "s3_ownership" {
   }
 }
 
-resource "aws_s3_bucket_acl" "s3_acl" {
-  bucket = aws_s3_bucket.website_bucket.id
-  acl    = "public-read"
-}
+# Removed aws_s3_bucket_acl as it conflicts with ownership controls
+# Bucket policies are used instead to manage public access
 
 resource "aws_s3_object" "index_html" {
-  bucket = aws_s3_bucket.website_bucket.id
-  key    = "index.html"
-  source = var.index_html_path  # Use variable for local path
+  bucket       = aws_s3_bucket.website_bucket.id
+  key          = "index.html"
+  source       = var.index_html_path  # Use variable for local path
   content_type = "text/html"
-  acl    = "public-read"
 }
 
 resource "aws_s3_object" "error_html" {
-  bucket = aws_s3_bucket.website_bucket.id
-  key    = "error.html"
-  source = var.error_html_path  # Use variable for local path
-  acl    = "public-read"
+  bucket       = aws_s3_bucket.website_bucket.id
+  key          = "error.html"
+  source       = var.error_html_path  # Use variable for local path
   content_type = "text/html"
 }
+
 resource "aws_s3_bucket_policy" "public_policy" {
   bucket = aws_s3_bucket.website_bucket.id
 

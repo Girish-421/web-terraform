@@ -1,5 +1,4 @@
 output "website_url" {
-  value       = aws_s3_bucket.website_bucket.website_endpoint
-  description = "The URL of the static website hosted on S3"
+  description = "The URL of the static website"
+  value       = aws_s3_bucket_website_configuration.web_config.website_endpoint
 }
-
