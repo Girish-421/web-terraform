@@ -57,11 +57,23 @@ resource "aws_s3_bucket_policy" "public_policy" {
     Version = "2012-10-17",
     Statement = [
       {
-        Effect    = "Allow",
-        Principal = "*",
-        Action    = "s3:GetObject",
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:GetObject"
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
+      },
+      {
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:ListBucket"
+        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
+        Condition = {
+          IpAddress = {
+            "aws:SourceIp" = "0.0.0.0/0"  # Optional: Allow access from any IP address
+          }
+        }
       }
     ]
   })
 }
+
