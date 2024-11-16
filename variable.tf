@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "bucket_name" {
   description = "The name of the S3 bucket for static website hosting"
   type        = string
-  default     = "giriw"  # Ensure the name is globally unique
+  default     = "girie"  # Ensure the name is globally unique
 }
 
 variable "index_html_path" {
