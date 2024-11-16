@@ -60,18 +60,13 @@ resource "aws_s3_bucket_policy" "public_policy" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
+        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"  # Apply to all objects in the bucket
       },
       {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:ListBucket"
-        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
-        Condition = {
-          IpAddress = {
-            "aws:SourceIp" = "0.0.0.0/0"  # Optional: Allow access from any IP address
-          }
-        }
+        Resource  = aws_s3_bucket.website_bucket.arn  # Apply to the bucket itself
       }
     ]
   })
