@@ -19,9 +19,9 @@ resource "aws_s3_bucket_website_configuration" "web_config" {
 
 resource "aws_s3_bucket_public_access_block" "public_access_block" {
   bucket                  = aws_s3_bucket.website_bucket.id
-  block_public_acls       = false  # Allow public ACLs
+  block_public_acls       = true  # Allow public ACLs
   block_public_policy     = false  # Allow public bucket policies
-  ignore_public_acls      = false  # Do not ignore ACLs
+  ignore_public_acls      = true  # Do not ignore ACLs
   restrict_public_buckets = false
 }
 
