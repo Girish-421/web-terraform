@@ -6,8 +6,8 @@ pipeline {
     }
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials('aws-credentials')  // Replace with your AWS credentials ID
-        AWS_SECRET_ACCESS_KEY = credentials('aws-credentials')  // Replace with your AWS credentials ID
+        AWS_ACCESS_KEY_ID = credentials('aws-credentials') 
+        AWS_SECRET_ACCESS_KEY = credentials('aws-credentials') 
     }
 
     stages {
@@ -62,13 +62,10 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                     script {
-                        // Docker login
                         sh '''
                             echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin
                         '''
-                        // Docker build and tag
                         sh 'docker build -t $DOCKER_HUB_USERNAME/static-website .'
-                        // Docker push
                         sh 'docker push $DOCKER_HUB_USERNAME/static-website'
                     }
                 }
@@ -78,7 +75,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()  // Clean workspace after pipeline execution
+            cleanWs() 
         }
     }
 }
