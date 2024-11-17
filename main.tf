@@ -3,12 +3,11 @@ resource "random_id" "bucket_name" {
 }
 
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = "website-${random_id.bucket_name.hex}"  # Use unique bucket name
+  bucket = "website-${random_id.bucket_name.hex}"  # Unique bucket name
   tags = {
     Name = "StaticWebsiteBucket"
   }
 }
-
 
 resource "aws_s3_bucket_website_configuration" "web_config" {
   bucket = aws_s3_bucket.website_bucket.id
@@ -18,16 +17,18 @@ resource "aws_s3_bucket_website_configuration" "web_config" {
   }
 
   error_document {
-    key = "error.html"  # Define error document
+    key = "error.html"
   }
+
+  depends_on = [aws_s3_bucket.website_bucket]
 }
 
 resource "aws_s3_bucket_public_access_block" "public_access_block" {
   bucket                  = aws_s3_bucket.website_bucket.id
-  block_public_acls       = false  # Allow public ACLs
-  block_public_policy     = false  # Allow public bucket policies
-  ignore_public_acls      = false  # Do not ignore ACLs
-  restrict_public_buckets = false  # Allow public access
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_ownership_controls" "s3_ownership" {
@@ -40,16 +41,21 @@ resource "aws_s3_bucket_ownership_controls" "s3_ownership" {
 resource "aws_s3_object" "index_html" {
   bucket       = aws_s3_bucket.website_bucket.id
   key          = "index.html"
-  source       = var.index_html_path  # Use variable for local path
+  source       = var.index_html_path
   content_type = "text/html"
+
+  depends_on = [aws_s3_bucket.website_bucket]
 }
 
 resource "aws_s3_object" "error_html" {
   bucket       = aws_s3_bucket.website_bucket.id
   key          = "error.html"
-  source       = var.error_html_path  # Use variable for local path
+  source       = var.error_html_path
   content_type = "text/html"
+
+  depends_on = [aws_s3_bucket.website_bucket]
 }
+
 resource "aws_s3_bucket_policy" "public_policy" {
   bucket = aws_s3_bucket.website_bucket.id
 
@@ -59,13 +65,11 @@ resource "aws_s3_bucket_policy" "public_policy" {
       {
         Effect    = "Allow",
         Principal = "*",
-        Action    = [
-          "s3:GetObject",  # Allows reading objects
-          "s3:PutObject"   # Allows uploading objects
-        ],
+        Action    = "s3:GetObject",
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
       }
     ]
   })
-}
 
+  depends_on = [aws_s3_bucket_public_access_block.public_access_block]
+}
