@@ -7,8 +7,8 @@ WORKDIR /usr/share/nginx/html
 # Remove the default nginx static files
 RUN rm -rf ./*
 
-# Copy only the index.html file into the container
-COPY ./index.html ./
+# Copy your local static website files into the container
+COPY ./index.html ./error.html ./
 
 # Expose port 80 to allow traffic to reach the container
 EXPOSE 80
