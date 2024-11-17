@@ -65,7 +65,11 @@ pipeline {
             }
         }
 
+        // Docker-related stages will only run if 'apply' is chosen
         stage('Build Docker Image') {
+            when {
+                expression { return params.ACTION == 'apply' }
+            }
             steps {
                 script {
                     // Docker login using credentials from Jenkins
@@ -76,6 +80,9 @@ pipeline {
         }
 
         stage('Push Docker Image') {
+            when {
+                expression { return params.ACTION == 'apply' }
+            }
             steps {
                 script {
                     sh 'docker push $DOCKER_HUB_USERNAME/static-website'
