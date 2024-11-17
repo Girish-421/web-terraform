@@ -45,7 +45,6 @@ resource "aws_s3_object" "error_html" {
   source       = var.error_html_path  # Use variable for local path
   content_type = "text/html"
 }
-
 resource "aws_s3_bucket_policy" "public_policy" {
   bucket = aws_s3_bucket.website_bucket.id
 
@@ -55,9 +54,13 @@ resource "aws_s3_bucket_policy" "public_policy" {
       {
         Effect    = "Allow",
         Principal = "*",
-        Action    = "s3:GetObject",
+        Action    = [
+          "s3:GetObject",  # Allows reading objects
+          "s3:PutObject"   # Allows uploading objects
+        ],
         Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
       }
     ]
   })
 }
+
