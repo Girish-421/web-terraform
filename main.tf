@@ -22,9 +22,8 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
   block_public_acls       = false  # Allow public ACLs
   block_public_policy     = false  # Allow public bucket policies
   ignore_public_acls      = false  # Do not ignore ACLs
-  restrict_public_buckets = false
+  restrict_public_buckets = false  # Allow public access
 }
-
 
 resource "aws_s3_bucket_ownership_controls" "s3_ownership" {
   bucket = aws_s3_bucket.website_bucket.id
@@ -32,9 +31,6 @@ resource "aws_s3_bucket_ownership_controls" "s3_ownership" {
     object_ownership = "BucketOwnerPreferred"
   }
 }
-
-# Removed aws_s3_bucket_acl as it conflicts with ownership controls
-# Bucket policies are used instead to manage public access
 
 resource "aws_s3_object" "index_html" {
   bucket       = aws_s3_bucket.website_bucket.id
