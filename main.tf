@@ -1,9 +1,14 @@
+resource "random_id" "bucket_name" {
+  byte_length = 8
+}
+
 resource "aws_s3_bucket" "website_bucket" {
-  bucket = var.bucket_name  # Use variable for bucket name
+  bucket = "website-${random_id.bucket_name.hex}"  # Use unique bucket name
   tags = {
     Name = "StaticWebsiteBucket"
   }
 }
+
 
 resource "aws_s3_bucket_website_configuration" "web_config" {
   bucket = aws_s3_bucket.website_bucket.id

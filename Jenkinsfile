@@ -68,7 +68,7 @@ pipeline {
         // Docker-related stages will only run if 'apply' is chosen
         stage('Build Docker Image') {
             when {
-                expression { return params.ACTION == 'apply' }
+                expression { return params.ACTION == 'apply' fileExists('index.html')}
             }
             steps {
                 script {
